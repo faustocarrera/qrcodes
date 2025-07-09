@@ -5,9 +5,9 @@ A command line tool to generate QR codes with customizable options.
 """
 
 import click
-from qrgen import get_path
-from qrgen.encoder import QRencoder
-from qrgen.decoder import QRdecoder
+from qrcreator import get_path
+from qrcreator import QRencoder
+from qrcreator import QRdecoder
 
 
 @click.command()
@@ -64,7 +64,6 @@ def decode(filename):
 @click.group()
 def cli():
     """QR Code Generator and Decoder CLI Tool"""
-    pass
 
 
 # Add commands to group
