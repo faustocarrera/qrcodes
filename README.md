@@ -14,7 +14,7 @@ A command line tool to generate QR codes with customizable options.
 ## Installation
 
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Usage Examples:
@@ -31,3 +31,4 @@ __Advanced options:__
 ```bash
 python qr_generator.py "My text" -s 15 -b 2 --fill-color blue --back-color yellow
 python qr_generator.py "Data" --error-correction H
+```
