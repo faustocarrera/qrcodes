@@ -21,8 +21,9 @@ from qrgen.decoder import QRdecoder
               )
 @click.option('--fill-color', '-f', default='black', help='Fill color (default: black)')
 @click.option('--back-color', '-bg', default='white', help='Background color (default: white)')
+@click.option('--base64', '-b64', is_flag=True, help='Output as base64 encoded string instead of saving to file')
 @click.option('--verbose', '-v', is_flag=True, default=False, help='Output messages')
-def generate(text, output, size, border, error_correction, fill_color, back_color, verbose):
+def generate(text, output, size, border, error_correction, fill_color, back_color, verbose, base64):
     """
     Generate a QR code from the given TEXT.
 
@@ -32,7 +33,7 @@ def generate(text, output, size, border, error_correction, fill_color, back_colo
         python qr_generator.py "Contact info" --fill-color blue --back-color yellow
     """
     qrcode_path = get_path(__file__, 'qrcodes', output)
-    qrgen = QRencoder(text, filename=qrcode_path, verbose=verbose)
+    qrgen = QRencoder(text, filename=qrcode_path, verbose=verbose, base64=base64)
     qrgen.set_size(size)
     qrgen.set_border(border)
     qrgen.set_error_correction(error_correction)
