@@ -1,5 +1,5 @@
-QR Code Generator CLI Tool
-==========================
+QR Code Generator and decoder
+=============================
 
 A command line tool to generate QR codes with customizable options.
 
@@ -8,7 +8,6 @@ A command line tool to generate QR codes with customizable options.
 - Generate QR codes from text with customizable options
 - Decode QR codes from image files
 - Customizable styling - colors, size, border, error correction
-- User-friendly CLI with Click framework
 - Optional return of base64 image
 
 ## Installation
