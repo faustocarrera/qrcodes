@@ -7,6 +7,7 @@ import qrcode
 import base64
 from io import BytesIO
 
+
 class QRencoder():
     "Generate a QR code from the given TEXT"
 
@@ -64,7 +65,8 @@ class QRencoder():
             )
             qr.add_data(self.text)
             qr.make(fit=True)
-            img = qr.make_image(fill_color=self.fill_color, back_color=self.back_color)
+            img = qr.make_image(fill_color=self.fill_color,
+                                back_color=self.back_color)
             # if base64 image
             if self.base64:
                 return self.__image_to_base64(img, 'PNG')
@@ -74,7 +76,8 @@ class QRencoder():
                 print(f"QR code generated successfully: {self.filename}")
             return self.filename
         except qrcode.exceptions.DataOverflowError as e:
-            print(f"Error: Data too large for the selected QR code version and error correction level: {str(e)}")
+            print(
+                f"Error: Data too large for the selected QR code version and error correction level: {str(e)}")
         except IOError as e:
             print(f"Error saving QR code image: {str(e)}")
 
