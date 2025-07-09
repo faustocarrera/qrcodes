@@ -6,10 +6,10 @@ A command line tool to generate QR codes with customizable options.
 ## Features:
 
 - Generate QR codes from text with customizable options
-- Decode QR codes from image files (optional feature)
-- Multiple output formats - PNG, JPEG, BMP, GIF
+- Decode QR codes from image files
 - Customizable styling - colors, size, border, error correction
 - User-friendly CLI with Click framework
+- Optional return of base64 image
 
 ## Installation
 

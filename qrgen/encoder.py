@@ -4,6 +4,8 @@ QR Code Generator
 """
 
 import qrcode
+import base64
+from io import BytesIO
 
 class QRencoder():
     "Generate a QR code from the given TEXT"
@@ -15,7 +17,7 @@ class QRencoder():
         'H': qrcode.constants.ERROR_CORRECT_H
     }
 
-    def __init__(self, text, filename='qrcode.png', verbose=False):
+    def __init__(self, text, filename='qrcode.png', verbose=False, base64=False):
         self.text = text
         self.filename = filename
         self.size = 10
@@ -23,6 +25,7 @@ class QRencoder():
         self.error_correction = 'M'
         self.fill_color = 'black'
         self.back_color = 'white'
+        self.base64 = base64
         self.verbose = verbose
 
     def set_size(self, size):
@@ -62,6 +65,10 @@ class QRencoder():
             qr.add_data(self.text)
             qr.make(fit=True)
             img = qr.make_image(fill_color=self.fill_color, back_color=self.back_color)
+            # if base64 image
+            if self.base64:
+                return self.__image_to_base64(img, 'PNG')
+            # save image to file
             img.save(self.filename, format='PNG')
             if self.verbose:
                 print(f"QR code generated successfully: {self.filename}")
@@ -70,3 +77,15 @@ class QRencoder():
             print(f"Error: Data too large for the selected QR code version and error correction level: {str(e)}")
         except IOError as e:
             print(f"Error saving QR code image: {str(e)}")
+
+    def __image_to_base64(self, img, format='PNG'):
+        "Convert PIL Image to base64 string."
+        buffer = BytesIO()
+        img.save(buffer, format=format.upper())
+        img_bytes = buffer.getvalue()
+        buffer.close()
+        # Encode to base64
+        base64_string = base64.b64encode(img_bytes).decode('utf-8')
+        # Return with data URI prefix
+        mime_type = f"image/{format.lower()}"
+        return f"data:{mime_type};base64,{base64_string}"
